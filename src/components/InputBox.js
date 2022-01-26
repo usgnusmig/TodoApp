@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
 const InputBoxStd = styled.div`
   width: 100%;
 
   input {
-    width: 80%;
-    margin: 1.5rem 2rem;
+    width: 73%;
+    margin: 1.5rem 1.5rem 0rem 4rem;
     margin-right: 0;
     height: 1.5rem;
     border: none;
@@ -24,16 +24,48 @@ const InputBoxStd = styled.div`
     background: inherit;
     color: #ffffff;
     font-size: 1.5rem;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     padding: 0;
   }
 `;
 
-const InputBox = () => {
+const InputBox = ({ todo, setTodo }) => {
+  const [text, setText] = useState("");
+  const inputRef = useRef(null);
+
+  const onChangeHandler = (event) => {
+    setText(event.target.value);
+  };
+
+  const onClickHandler = (event) => {
+    event.preventDefault();
+
+    const nextTodo = todo.concat({
+      id: todo.length,
+      text,
+      checked: false,
+      deleted: false,
+    });
+
+    setTodo(nextTodo);
+
+    setText("");
+    inputRef.current.focus();
+  };
+
   return (
     <InputBoxStd>
-      <input placeholder="할 일을 추가해주세요" />
-      <button> + </button>
+      <input
+        type="text"
+        name="todoItem"
+        value={text}
+        ref={inputRef}
+        placeholder="할 일을 추가해주세요"
+        onChange={onChangeHandler}
+      />
+      <button type="submit" onClick={onClickHandler}>
+        +
+      </button>
     </InputBoxStd>
   );
 };

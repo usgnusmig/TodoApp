@@ -17,15 +17,19 @@ const MainStd = styled.div`
 `;
 
 const Main = () => {
-  const [todo, setTodo] = useState([
-    { text: "할일1", id: 1 },
-    { text: "할일2", id: 2 },
-  ]);
+  const [todo, setTodo] = useState([]);
   return (
     <MainStd>
-      <ItemList title={"할 일"} todo={todo} setTodo={setTodo} />
-      <InputBox />
-      <ItemList title={"완료된 항목"} todo={todo} setTodo={setTodo} />
+      <ItemList title={"할 일"} todo={todo} setTodo={setTodo} checked={false} />
+
+      <InputBox todo={todo} setTodo={setTodo} />
+
+      <ItemList
+        title={"완료된 항목"}
+        todo={todo}
+        setTodo={setTodo}
+        checked={true}
+      />
     </MainStd>
   );
 };
