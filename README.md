@@ -11,3 +11,7 @@
 - Item 삭제
 - Item 완료항목 체크
 - 완료된 Item 목록
+
+## 미리보기
+
+![](./src/assets/mok.png)
